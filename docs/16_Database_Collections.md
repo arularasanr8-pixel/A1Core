@@ -2,100 +2,40 @@
 
 Version: 1.0
 
-Status: Official
-
-Last Updated: 01-Aug-2026
+Status: In Progress
 
 ---
 
-# Collection: branches
+## Purpose
 
-Purpose
+This document defines every Firestore collection, field, data type, validation rule, relationship, and indexes used in A1 Core.
 
-Stores all branches.
-
-Fields
-
-branchId
-Type: string
-Example: VAL
-
-branchName
-Type: string
-
-status
-Type: boolean
-
-createdAt
-Type: timestamp
-
-updatedAt
-Type: timestamp
+This document will be completed before database implementation begins.
 
 ---
 
-# Collection: users
+## Collections
 
-Purpose
-
-Stores all users.
-
-Fields
-
-staffId
-
-name
-
-mobile
-
-email
-
-role
-
-branchId
-
-status
-
-deviceName
-
-fcmToken
-
-lastLogin
-
-createdAt
-
-updatedAt
+- branches
+- users
+- customers
+- products
+- productVariants
+- stock
+- suppliers
+- purchases
+- purchaseItems
+- sales
+- saleItems
+- serviceJobs
+- attendance
+- leaveRequests
+- expenses
+- notifications
+- activityLogs
+- counters
+- settings
 
 ---
 
-# Collection: customers
-
-Purpose
-
-Stores customer information.
-
-Fields
-
-customerId
-
-name
-
-mobile
-
-alternateMobile
-
-address
-
-branchId
-
-notes
-
-createdBy
-
-createdAt
-
-updatedAt
-
----
-
-(To be continued...)
+Status: 🚧 Under Design
