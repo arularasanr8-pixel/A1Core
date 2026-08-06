@@ -7,6 +7,7 @@ export interface Product {
   purchasePrice: number;
   sellingPrice: number;
   stock: number;
+  minimumStock: number;
   gst: number;
   active: boolean;
   createdAt: Date;

@@ -13,6 +13,7 @@ export default function ProductFormPage() {
   const [purchasePrice, setPurchasePrice] = useState("");
   const [sellingPrice, setSellingPrice] = useState("");
   const [stock, setStock] = useState("");
+  const [minimumStock, setMinimumStock] = useState("");
   const [gst, setGst] = useState("");
 
   const handleSave = async () => {
@@ -29,13 +30,13 @@ export default function ProductFormPage() {
       purchasePrice: Number(purchasePrice),
       sellingPrice: Number(sellingPrice),
       stock: Number(stock),
+      minimumStock: Number(minimumStock),
       gst: Number(gst),
       active: true,
       createdAt: new Date(),
     });
 
     alert("Product Added Successfully");
-
     navigate("/products");
   };
 
@@ -98,6 +99,14 @@ export default function ProductFormPage() {
             placeholder="Opening Stock"
             value={stock}
             onChange={(e) => setStock(e.target.value)}
+            className="rounded-lg border p-3"
+          />
+
+          <input
+            type="number"
+            placeholder="Minimum Stock"
+            value={minimumStock}
+            onChange={(e) => setMinimumStock(e.target.value)}
             className="rounded-lg border p-3"
           />
 

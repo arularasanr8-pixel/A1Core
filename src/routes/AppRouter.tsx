@@ -11,6 +11,7 @@ import ProductFormPage from "../pages/products/ProductFormPage";
 import BrandListPage from "../pages/brands/BrandListPage";
 import BrandFormPage from "../pages/brands/BrandFormPage";
 import ProductEditPage from "../pages/products/ProductEditPage";
+import StockDashboardPage from "../pages/stock/StockDashboardPage";
 
 export default function AppRouter() {
   return (
@@ -49,6 +50,15 @@ export default function AppRouter() {
   element={
     <ProtectedRoute>
       <ProductEditPage />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/stock"
+  element={
+    <ProtectedRoute>
+      <StockDashboardPage />
     </ProtectedRoute>
   }
 />

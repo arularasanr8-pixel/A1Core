@@ -55,6 +55,7 @@ export default function ProductListPage() {
               <th className="p-3 text-left">Brand</th>
               <th className="p-3 text-left">Category</th>
               <th className="p-3 text-left">Stock</th>
+              <th className="p-3 text-left">Status</th>
               <th className="p-3 text-left">Selling Price</th>
               <th className="p-3 text-left">Actions</th>
             </tr>
@@ -67,7 +68,25 @@ export default function ProductListPage() {
                 <td className="p-3">{product.name}</td>
                 <td className="p-3">{product.brand}</td>
                 <td className="p-3">{product.category}</td>
+
                 <td className="p-3">{product.stock}</td>
+
+                <td className="p-3">
+                  {product.stock === 0 ? (
+                    <span className="rounded bg-red-100 px-2 py-1 text-sm font-semibold text-red-600">
+                      🔴 Out of Stock
+                    </span>
+                  ) : product.stock <= product.minimumStock ? (
+                    <span className="rounded bg-yellow-100 px-2 py-1 text-sm font-semibold text-yellow-700">
+                      🟡 Low Stock
+                    </span>
+                  ) : (
+                    <span className="rounded bg-green-100 px-2 py-1 text-sm font-semibold text-green-700">
+                      🟢 In Stock
+                    </span>
+                  )}
+                </td>
+
                 <td className="p-3">₹ {product.sellingPrice}</td>
 
                 <td className="p-3">
@@ -95,7 +114,7 @@ export default function ProductListPage() {
             {products.length === 0 && (
               <tr>
                 <td
-                  colSpan={7}
+                  colSpan={8}
                   className="p-6 text-center text-gray-500"
                 >
                   No products found
