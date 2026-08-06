@@ -1,45 +1,76 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import AppLayout from "../../components/layout/AppLayout";
-import { addCustomer } from "../../services/customerService";
+import {
+  getCustomer,
+  updateCustomer,
+} from "../../services/customerService";
 
-export default function CustomerFormPage() {
+export default function CustomerEditPage() {
+  const { id } = useParams();
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(true);
 
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
 
-  const handleSave = async () => {
+  useEffect(() => {
+    loadCustomer();
+  }, []);
+
+  const loadCustomer = async () => {
+    if (!id) return;
+
+    const data = await getCustomer(id);
+
+    if (data) {
+      setName(data.name);
+      setMobile(data.mobile);
+      setEmail(data.email);
+      setAddress(data.address);
+    }
+
+    setLoading(false);
+  };
+
+  const handleUpdate = async () => {
+    if (!id) return;
+
     if (!name || !mobile) {
-      alert("Name and Mobile are required");
+      alert("Name and Mobile are required.");
       return;
     }
 
-    await addCustomer({
-      customerCode: "",
+    await updateCustomer(id, {
       name,
       mobile,
       email,
       address,
-      branchId: "BR001",
-      active: true,
-      createdAt: new Date(),
     });
 
-    alert("Customer Added Successfully");
+    alert("Customer updated successfully");
 
     navigate("/customers");
   };
+
+  if (loading) {
+    return (
+      <AppLayout>
+        <p>Loading...</p>
+      </AppLayout>
+    );
+  }
 
   return (
     <AppLayout>
       <div className="max-w-2xl rounded-xl bg-white p-6 shadow">
 
         <h1 className="mb-6 text-3xl font-bold">
-          Add Customer
+          Edit Customer
         </h1>
 
         <div className="space-y-4">
@@ -54,7 +85,7 @@ export default function CustomerFormPage() {
 
           <input
             type="text"
-            placeholder="Mobile Number"
+            placeholder="Mobile"
             value={mobile}
             onChange={(e) => setMobile(e.target.value)}
             className="w-full rounded-lg border p-3"
@@ -77,10 +108,10 @@ export default function CustomerFormPage() {
           />
 
           <button
-            onClick={handleSave}
+            onClick={handleUpdate}
             className="rounded-lg bg-blue-600 px-6 py-3 text-white hover:bg-blue-700"
           >
-            Save Customer
+            Update Customer
           </button>
 
         </div>

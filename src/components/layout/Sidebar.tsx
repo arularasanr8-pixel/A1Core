@@ -9,30 +9,28 @@ import {
   FileBarChart,
   Settings,
 } from "lucide-react";
+import { NavLink } from "react-router-dom";
+
 
 const menuItems = [
-  { name: "Dashboard", icon: LayoutDashboard },
-  { name: "Customers", icon: Users },
-  { name: "Products", icon: Package },
-  { name: "Stock", icon: Boxes },
-  { name: "Sales", icon: ShoppingCart },
-  { name: "Purchase", icon: Truck },
-  { name: "Service", icon: Wrench },
-  { name: "Reports", icon: FileBarChart },
-  { name: "Settings", icon: Settings },
+  { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+  { name: "Customers", path: "/customers", icon: Users },
+  { name: "Products", path: "/products", icon: Package },
+  { name: "Stock", path: "/stock", icon: Boxes },
+  { name: "Sales", path: "/sales", icon: ShoppingCart },
+  { name: "Purchase", path: "/purchase", icon: Truck },
+  { name: "Service", path: "/service", icon: Wrench },
+  { name: "Reports", path: "/reports", icon: FileBarChart },
+  { name: "Settings", path: "/settings", icon: Settings },
+  { name: "Brands", path: "/brands", icon: Package },
 ];
 
 export default function Sidebar() {
   return (
     <aside className="w-64 min-h-screen bg-slate-900 text-white">
-
       <div className="p-6 border-b border-slate-700">
-        <h1 className="text-2xl font-bold">
-          A1 Core
-        </h1>
-        <p className="text-sm text-slate-400">
-          ERP System
-        </p>
+        <h1 className="text-2xl font-bold">A1 Core</h1>
+        <p className="text-sm text-slate-400">ERP System</p>
       </div>
 
       <nav className="p-4 space-y-2">
@@ -40,17 +38,23 @@ export default function Sidebar() {
           const Icon = item.icon;
 
           return (
-            <button
+            <NavLink
               key={item.name}
-              className="flex items-center gap-3 w-full rounded-lg px-4 py-3 hover:bg-slate-800 transition"
+              to={item.path}
+              className={({ isActive }) =>
+                `flex items-center gap-3 rounded-lg px-4 py-3 transition ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : "hover:bg-slate-800"
+                }`
+              }
             >
               <Icon size={20} />
               <span>{item.name}</span>
-            </button>
+            </NavLink>
           );
         })}
       </nav>
-
     </aside>
   );
 }
